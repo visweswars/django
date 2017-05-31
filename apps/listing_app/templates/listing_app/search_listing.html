@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Listings</title>
+  {% load staticfiles %}
+  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
+  <link rel="stylesheet" href="{% static 'user_app/css/styles.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div>
+    {% if request.session.current_user != null %}
+    <span>Welcome <a href="{% url 'user_app:show_user' user_id=user.id %}">{{user.first_name}}</a></span> |
+    {% endif %}
+    <a href="{% url 'listing_app:index' %}">Home</a> |
+    <a href="{% url 'user_app:logout' %}">Logout</a>
+  </div>
+  <div class="box">
+    <h4>Listings</h4>
+      {% for listing in listings %}
+          <p><a href="{% url 'listing_app:show_listing' listing_id=listing.id %}"><img src="{% static 'user_app/images/logo.png' %}" alt="zillow">
+            {{listing.address1}} {{listing.address2}} {{listing.zipcode}}</a>
+             {{listing.neighborhood}}
+             {{listing.city}}
+             {{listing.country}}
+             {{listing.description}}
+             {{listing.price}}
+             {{listing.sqft}}
+             {{listing.beds}}
+             {{listing.baths}}
+             {{listing.sell}}
+             {{listing.rent}}
+             {{listing.user}}</p>
+      {% endfor %}
+  </div>
+  <div class="box">GOOGLE MAP</div>
+</body>
+</html>

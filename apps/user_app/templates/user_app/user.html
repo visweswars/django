@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>User Profile for {{user.last_name}}</title>
+  {% load staticfiles %}
+  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
+  <link rel="stylesheet" href="{% static 'user_app/css/styles.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div>
+    <a href="{% url 'listing_app:index' %}">Home</a> |
+    <a href="{% url 'user_app:logout' %}">Logout</a>
+  </div>
+  <div class="box">
+    <form action="/login" method="post">
+      <h4>User</h4>
+      {% csrf_token %}
+      <label for="first_name">First Name:</label>
+      <input type="text" name="first_name" value="{{user.first_name}}">
+      <label for="last_name">Last Name:</label>
+      <input type="text" name="last_name" value="{{user.last_name}}">
+
+      <label for="email">Email:</label>
+      <input type="text" name="email" value="{{user.email}}">
+      <label for="phone">Phone:</label>
+      <input type="text" name="phone" value="{{user.phone}}">
+
+      <label for="birthday">Birthday:</label>
+      <input type="date" name="birthday" value="{{user.birthday|date:"Y-m-d"}}">
+
+      <br>
+      <br>
+      <!--
+      <input class="button" type="submit" value="Sign In">
+      -->
+    </form>
+</body>
+
+</html>

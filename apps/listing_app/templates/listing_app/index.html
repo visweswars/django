@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Zillow: Real Estate, Apartments, Mortgages &amp; Home Values</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Mauricio Ruanova-Hurtado front-end web developer and software engineer career portfolio">
+  <meta name="keywords" content="Mauricio Ruanova-Hurtado,mruanova,mauricio ruanova">
+  <meta name="author" content="Mauricio Ruanova-Hurtado">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="utf-8"> {% load staticfiles %}
+  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
+  <link rel="stylesheet" href="{% static 'user_app/css/styles.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+        <a class="navbar-brand" href="#"><img src="{% static 'favicon.ico' %}" alt="zillow"></a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse in" aria-expanded="true">
+        <ul class="nav navbar-nav">
+          {% if request.session.current_user != null %}
+          <li class="active"><a href="{% url 'listing_app:search_listing' sell=True %}">Buy</a></li>
+          <li><a href="{% url 'listing_app:search_listing' sell=False %}">Rent</a></li>
+          <li><a href="{% url 'listing_app:new_listing' %}">Sell</a></li>
+          <li><a href="{% url 'user_app:search_user' %}">Agent finder</a></li>
+          {% else %}
+          <li class="active"><a href="{% url 'user_app:sign_in' %}">Buy</a></li>
+          <li><a href="{% url 'user_app:sign_in' %}">Rent</a></li>
+          <li><a href="{% url 'user_app:sign_in' %}">Sell</a></li>
+          <li><a href="{% url 'user_app:sign_in' %}">Agent finder</a></li>
+          {% endif %}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {% if request.session.current_user != null %}
+          <li><a href="{% url 'user_app:show_user' user_id=user.id %}">{{user.first_name}}</a></li>
+          <li><a href="{% url 'user_app:logout' %}">Logout</a></li>
+          {% else %}
+          <li><a href="{% url 'user_app:sign_in' %}">Sign in</a></li>
+          <li><a href="{% url 'user_app:join' %}">Join</a></li>
+          {% endif %}
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+    <!--/.container-fluid -->
+  </nav>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Find your way home ©</h1>
+      <form action="{% url 'listing_app:search_listing' %}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="sell" value="True">
+          <input class="button" type="submit" value="Search">
+      </form>
+    </div>
+    <a href="http://mruanova.com/">Mauricio Ruanova-Hurtado</a> ©
+  </div>
+
+</body>
+
+</html>

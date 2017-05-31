@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Listing</title>
+  {% load staticfiles %}
+  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
+  <link rel="stylesheet" href="{% static 'user_app/css/styles.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div>
+    {% if request.session.current_user != null %}
+    <span>Welcome <a href="{% url 'user_app:show_user' user_id=user.id %}">{{user.first_name}}</a></span> |
+    {% endif %}
+    <a href="{% url 'listing_app:index' %}">Home</a> |
+    <a href="{% url 'user_app:logout' %}">Logout</a>
+  </div> 
+  
+  {% if messages %} {% for message in messages %}
+  <p class="red">{{ message }}</p>
+  {% endfor %} {% endif %}
+
+  <div class="box">
+    <h4>Listing</h4>
+    <form action="{% url 'listing_app:create_listing' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="user" value="user.id">
+
+        <label for="address1">Address 1:</label>
+        <input type="text" name="address1" value="{{request.session.address1}}">
+
+        <label for="address2">Address 2:</label>
+        <input type="text" name="address2" value="{{request.session.address2}}">
+
+        <label for="zipcode">Zip Code:</label>
+        <input type="text" name="zipcode" value="{{request.session.zipcode}}">
+
+        <label for="neighborhood">Select Neighborhood:</label>
+        <select name="neighborhood-select">
+          <option> </option>
+          {% for neighborhood in neighborhoods %}
+          <option value="{{neighborhood.id}}">{{neighborhood.name}}</option>
+          {% endfor %}
+        </select>
+        <label for="neighborhood">or add Neighborhood:</label>
+        <input type="text" name="new-neighborhood" value="">
+
+        <label for="city">Select City:</label>
+        <select name="city-select">
+          <option> </option>
+          {% for city in citys %}
+          <option value="{{city.id}}">{{city.name}}</option>
+          {% endfor %}
+        </select>
+        <label for="city">or add City:</label>
+        <input type="text" name="new-city" value="">
+
+        <label for="country">Select Country:</label>
+        <select name="country-select">
+          <option> </option>
+          {% for country in countrys %}
+          <option value="{{country.id}}">{{country.name}}</option>
+          {% endfor %}
+        </select>
+        <label for="country">or add Country:</label>
+        <input type="text" name="new-country" value="">
+
+        <label for="description">Description:</label>
+        <textarea name="description">{{request.session.description}}</textarea>
+
+        <label for="price">Price:</label>
+        <input type="text" name="price" value="{{request.session.price}}">
+
+        <label for="sqft">Square Feet:</label>
+        <input type="text" name="sqft" value="{{request.session.sqft}}">
+
+        <label for="beds"># of beds:</label>
+        <input type="text" name="beds" value="{{request.session.beds}}">
+
+        <label for="baths"># of baths:</label>
+        <input type="text" name="baths" value="{{request.session.baths}}">
+
+        <label for="rent">Sell or Rent?</label>
+        <input type="radio" name="buy"  name="sell" checked> sell
+        <input type="radio" name="buy"  name="rent" > rent
+
+        <input class="button" type="submit">
+    </form>
+  </div>
+</body>
+</html>

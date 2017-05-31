@@ -1,0 +1,54 @@
+Zillow
+
+User stories:
+
+Sign In / Sign Up
+
+
+List a property
+    
+- Description
+    
+- Images
+    
+- Sell / Rent
+
+
+View Listing
+
+Favorite Listing
+
+
+Browse Listings (Buy)
+    
+- Search
+    
+- Filter
+
+Find on Map
+    
+- Search
+    
+- Filter
+
+
+Edit Listing
+
+Edit Account
+
+
+Contact Seller
+
+
+
+
+STRETCH GOALS
+
+
+- Price Estimate
+
+- Mortgage Calculator
+
+- Save Searches
+
+- Draw Boundaries on Map
