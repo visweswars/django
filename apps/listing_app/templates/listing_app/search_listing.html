@@ -29,15 +29,15 @@
             <a href="{% url 'listing_app:show_listing' listing_id=listing.id %}">
             {{listing.address1}} {{listing.address2}}, {{listing.zipcode}}</a>
             <!--
-              {{listing.city}}, {{listing.country}},
-             {{listing.description}}
-             {{listing.price}}
-             {{listing.sqft}}
-             {{listing.beds}}
-             {{listing.baths}}
-             {{listing.sell}}
-             {{listing.rent}}
-             {{listing.user}}
+              {{listing.city}}, {{listing.state}}, {{listing.country}},
+              {{listing.description}}
+              {{listing.price}}
+              {{listing.sqft}}
+              {{listing.beds}}
+              {{listing.baths}}
+              {{listing.sell}}
+              {{listing.rent}}
+              {{listing.user}}
              -->
              </li>
       {% endfor %}

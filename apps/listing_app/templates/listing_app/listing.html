@@ -25,7 +25,7 @@
 
   <div class="box">
     <h4>Listing</h4>
-    <form action="{% url 'listing_app:create_listing' %}" method="post">
+    <form action="{% url 'listing_app:edit_listing' listing_id=listing.id %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="user" value="user.id">
 
@@ -62,6 +62,8 @@
           {% endfor %}
         </select>
 
+        <!--State-->
+
         <label for="country">Country:</label>
         <select name="country-select">
           <option> </option>
@@ -88,10 +90,20 @@
 
         <label for="baths"># of baths:</label>
         <input type="text" name="baths" value="{{listing.baths}}">
+        
+        {% if listing.sell %}
+        <input type="checkbox" name="sell"  value="sell" checked> sell
+        {% else %}
+        <input type="checkbox" name="sell"  value="sell"> sell
+        {% endif %}
 
-        <input type="radio" name="buy"  name="sell" checked> sell
-        <input type="radio" name="buy"  name="rent" > rent
+        {% if listing.rent %}
+        <input type="checkbox" name="rent"  value="rent" checked> rent
+        {% else %}
+        <input type="checkbox" name="rent"  value="rent"> rent
+        {% endif %}
 
+        <input class="button" type="submit" value="Save Changes">
     </form>
   </div>
 </body>

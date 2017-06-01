@@ -1,9 +1,7 @@
 var geocoder;
 var map;
 var markers=[];
-console.log("google.maps");
 function initialize() {
-    console.log("initialize");
     geocoder = new google.maps.Geocoder();
     var latlng = new google.maps.LatLng(41.8971828, -87.63523709999998);
     var mapOptions = {
@@ -37,10 +35,7 @@ function addMarker(index,title,address) {
     });
 };
 $(document).ready(function () {
-    console.log("ready");
     $("li").each(function( index ) {
-        console.log( $( this ).text() );                
         addMarker(index,"Zillow",$( this ).text());
-
     });
 });
