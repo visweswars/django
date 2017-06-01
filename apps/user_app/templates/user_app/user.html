@@ -18,7 +18,11 @@
     <a href="{% url 'user_app:logout' %}">Logout</a>
   </div>
   <div class="box">
-    <form action="/login" method="post">
+    <!--This is the template where a user can edit his info-->
+    {% for message in messages %}
+      <p>{{ messsage }}</p>
+    {% endfor %}
+    <form action="/edit" method="post">
       <h4>User</h4>
       {% csrf_token %}
       <label for="first_name">First Name:</label>
@@ -36,9 +40,9 @@
 
       <br>
       <br>
-      <!--
-      <input class="button" type="submit" value="Sign In">
-      -->
+      
+      <input class="button" type="submit" value="Save Changes">
+      
     </form>
 </body>
 
