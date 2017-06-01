@@ -17,11 +17,16 @@
     <a href="{% url 'listing_app:index' %}">Home</a> |
     <a href="{% url 'user_app:logout' %}">Logout</a>
   </div>
+  
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
   <div class="box">
-    <!--This is the template where a user can edit his info-->
-    {% for message in messages %}
-      <p>{{ messsage }}</p>
-    {% endfor %}
     <form action="/edit" method="post">
       <h4>User</h4>
       {% csrf_token %}
@@ -38,9 +43,6 @@
       <label for="birthday">Birthday:</label>
       <input type="date" name="birthday" value="{{user.birthday|date:"Y-m-d"}}">
 
-      <br>
-      <br>
-      
       <input class="button" type="submit" value="Save Changes">
       
     </form>

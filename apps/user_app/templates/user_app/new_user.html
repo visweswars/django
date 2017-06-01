@@ -23,9 +23,13 @@
     <a href="{% url 'user_app:sign_in' %}">Sign in</a>
   </div>
 
-  {% if messages %} {% for message in messages %}
-  <p class="red">{{ message }}</p>
-  {% endfor %} {% endif %}
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 
   <div class="box">
     <form action="/create_user" method="post">

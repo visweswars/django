@@ -18,6 +18,15 @@
     <a href="{% url 'listing_app:index' %}">Home</a> |
     <a href="{% url 'user_app:logout' %}">Logout</a>
   </div>
+  
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  
   <div class="box">
     <h4>Users</h4>
       {% for user in users %}
