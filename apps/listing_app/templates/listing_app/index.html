@@ -61,7 +61,7 @@
   <div class="container">
     <div class="jumbotron">
       <h1>Find your way home ©</h1>
-      <form action="{% url 'listing_app:search_listing' %}" method="post">
+      <form action="{% url 'listing_app:search_listing' sell=False %}" method="post">
           {% csrf_token %}
           <input type="hidden" name="sell" value="True">
           <input class="button" type="submit" value="Search">
