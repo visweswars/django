@@ -52,9 +52,6 @@ class ListingManager(models.Manager):
             if found_listing:
                 messages.append("address1 is already registered")
                 error = True
-        if len(data['address2']) < 2:
-            messages.append("address2 must be at least 2 characters")
-            error = True
         if len(data['zipcode']) != 5:
             messages.append("zipcode must be 5 digits")
             error = True
