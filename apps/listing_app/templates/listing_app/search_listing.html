@@ -22,13 +22,14 @@
   </div>
   <div class="box">
     <h4>Listings</h4>
+      <ul>
       {% for listing in listings %}
-          <p><a href="{% url 'listing_app:show_listing' listing_id=listing.id %}"><img src="{% static 'user_app/images/logo.png' %}" alt="zillow">
-            {{listing.address1}} {{listing.address2}} {{listing.zipcode}}</a>
+          <li>
+            <img src="{% static 'user_app/images/logo.png' %}" alt="{{listing.neighborhood}}">
+            <a href="{% url 'listing_app:show_listing' listing_id=listing.id %}">
+            {{listing.address1}} {{listing.address2}}, {{listing.zipcode}}</a>
             <!--
-             {{listing.neighborhood}}
-             {{listing.city}}
-             {{listing.country}}
+              {{listing.city}}, {{listing.country}},
              {{listing.description}}
              {{listing.price}}
              {{listing.sqft}}
@@ -38,8 +39,9 @@
              {{listing.rent}}
              {{listing.user}}
              -->
-             </p>
+             </li>
       {% endfor %}
+      </ul>
   </div>
   <div class="box">
     <div id="map"></div>
