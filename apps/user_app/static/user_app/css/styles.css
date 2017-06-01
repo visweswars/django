@@ -69,3 +69,7 @@ select{
 .red{
   color:red;
 }
+#map {
+    height: 533px;
+    width: 100%;
+}

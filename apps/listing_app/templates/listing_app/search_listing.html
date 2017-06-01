@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="{% static 'user_app/js/script.js'%}"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATA9xz6PHfFxFlVLPd4ouYwB3BEQRBgPU&callback=initialize"></script>
 </head>
 <body>
   <div>
@@ -23,6 +25,7 @@
       {% for listing in listings %}
           <p><a href="{% url 'listing_app:show_listing' listing_id=listing.id %}"><img src="{% static 'user_app/images/logo.png' %}" alt="zillow">
             {{listing.address1}} {{listing.address2}} {{listing.zipcode}}</a>
+            <!--
              {{listing.neighborhood}}
              {{listing.city}}
              {{listing.country}}
@@ -33,9 +36,13 @@
              {{listing.baths}}
              {{listing.sell}}
              {{listing.rent}}
-             {{listing.user}}</p>
+             {{listing.user}}
+             -->
+             </p>
       {% endfor %}
   </div>
-  <div class="box">GOOGLE MAP</div>
+  <div class="box">
+    <div id="map"></div>
+  </div>
 </body>
 </html>
