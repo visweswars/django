@@ -36,7 +36,7 @@ class ListingManager(models.Manager):
         session['address2'] = data['address2']
         session['zipcode'] = data['zipcode']
         session['neighborhood'] = data['neighborhood']
-        # session['state'] = data['state']
+        session['state'] = data['state']
         session['city'] = data['city']
         session['country'] = data['country']
         session['description'] = data['description']
@@ -87,7 +87,7 @@ class ListingManager(models.Manager):
         address2=data['address2'], 
         zipcode=data['zipcode'], 
         neighborhood=Neighborhood.objects.get(id=data['neighborhood']), 
-        # state=State.objects.get(id=data['statecity']), 
+        state=State.objects.get(id=data['state']), 
         city=City.objects.get(id=data['city']), 
         country=Country.objects.get(id=data['country']),  
         description=data['description'], 
@@ -105,7 +105,7 @@ class ListingManager(models.Manager):
         session.pop('address2')
         session.pop('zipcode')
         session.pop('neighborhood')
-        # session.pop('state')
+        session.pop('state')
         session.pop('city')
         session.pop('country')
         session.pop('description')
@@ -123,7 +123,7 @@ class ListingManager(models.Manager):
         session['address2'] = data['address2']
         session['zipcode'] = data['zipcode']
         session['neighborhood'] = data['neighborhood']
-        # session['state'] = data['state']
+        session['state'] = data['state']
         session['city'] = data['city']
         session['country'] = data['country']
         session['description'] = data['description']
@@ -177,7 +177,7 @@ class ListingManager(models.Manager):
         listing.address2 = data['address2']
         listing.zipcode = data['zipcode']
         listing.neighborhood = Neighborhood.objects.get(id=data['neighborhood'])
-        # listing.state = State.objects.get(id=data['statecity'])
+        listing.state = State.objects.get(id=data['state'])
         listing.city = City.objects.get(id=data['city'])
         listing.country = Country.objects.get(id=data['country'])
         listing.description = data['description']
@@ -192,7 +192,7 @@ class ListingManager(models.Manager):
         session.pop('address2') 
         session.pop('zipcode') 
         session.pop('neighborhood') 
-        # session.pop('state') 
+        session.pop('state') 
         session.pop('city') 
         session.pop('country') 
         session.pop('description') 
@@ -210,14 +210,14 @@ class Listing(models.Model):
     address2 = models.CharField(max_length=25)
     zipcode = models.CharField(max_length=5)
     neighborhood = models.ForeignKey(Neighborhood, related_name="neighborhoods")
-    # state = models.ForeignKey(State, related_name="states")
+    state = models.ForeignKey(State, related_name="states")
     city = models.ForeignKey(City, related_name="citys")
     country = models.ForeignKey(Country, related_name="countrys")
     description = models.TextField(max_length=140)
     price = models.IntegerField()
     sqft = models.IntegerField()
     beds = models.SmallIntegerField()
-    baths = models.DecimalField(decimal_places=1, max_digits=5) # half ?
+    baths = models.DecimalField(decimal_places=1, max_digits=5)
     sell = models.BooleanField()
     rent = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)

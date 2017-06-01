@@ -66,7 +66,10 @@ select{
   margin-top:15px;
   padding: 5px;
 }
-.red{
+.success{
+  color:green;
+}
+.error{
   color:red;
 }
 #map {

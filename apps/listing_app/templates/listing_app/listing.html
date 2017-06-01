@@ -19,9 +19,13 @@
     <a href="{% url 'user_app:logout' %}">Logout</a>
   </div> 
   
-  {% if messages %} {% for message in messages %}
-  <p class="red">{{ message }}</p>
-  {% endfor %} {% endif %}
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 
   <div class="box">
     <h4>Listing</h4>
@@ -62,8 +66,20 @@
           {% endfor %}
         </select>
 
-        <!--State-->
-
+        <label for="state">Select State:</label>
+        <select name="state-select">
+          <option> </option>
+          {% for state in states %}
+          {% if state.id == listing.state.id %}
+          <option value="{{state.id}}" selected>{{state.name}}</option>
+          {% else %}
+          <option value="{{state.id}}">{{state.name}}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+        <label for="state">or add State:</label>
+        <input type="text" name="new-state" value="">
+        
         <label for="country">Country:</label>
         <select name="country-select">
           <option> </option>

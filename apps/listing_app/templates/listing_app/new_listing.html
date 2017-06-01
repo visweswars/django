@@ -19,9 +19,13 @@
     <a href="{% url 'user_app:logout' %}">Logout</a>
   </div> 
   
-  {% if messages %} {% for message in messages %}
-  <p class="red">{{ message }}</p>
-  {% endfor %} {% endif %}
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
 
   <div class="box">
     <h4>Listing</h4>
@@ -58,7 +62,15 @@
         <label for="city">or add City:</label>
         <input type="text" name="new-city" value="">
 
-        <!--State-->
+        <label for="state">Select State:</label>
+        <select name="state-select">
+          <option> </option>
+          {% for state in states %}
+          <option value="{{state.id}}">{{state.name}}</option>
+          {% endfor %}
+        </select>
+        <label for="state">or add State:</label>
+        <input type="text" name="new-state" value="">
 
         <label for="country">Select Country:</label>
         <select name="country-select">
@@ -85,8 +97,8 @@
         <label for="baths"># of baths:</label>
         <input type="text" name="baths" value="{{request.session.baths}}">
 
-        <input type="radio" name="buy"  name="sell" checked> sell
-        <input type="radio" name="buy"  name="rent" > rent
+        <input type="checkbox" name="sell"  value="sell" checked> sell
+        <input type="checkbox" name="rent"  value="rent" > rent
 
         <input class="button" type="submit">
     </form>
