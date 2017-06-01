@@ -81,3 +81,31 @@ def search_user(request):
         user = User.objects.get(pk=request.session['current_user'])
         context['user'] = user
     return render(request, "user_app/search_user.html", context)
+
+#Processes user info edit from the user.html template
+def edit_user(request):
+    user = User.objects.get(pk=request.session['current_user'])
+    user_id = request.session['current_user']
+    if request.method == 'POST':
+        form_data = {
+            'first_name':request.POST['first_name'],
+            'last_name':request.POST['last_name'],
+            'email':request.POST['email'],
+            'phone':request.POST['phone'], 
+            'birthday':request.POST['birthday']
+        }
+        user_data = {
+            'first_name':user.first_name,
+            'last_name':user.last_name,
+            'email':user.email,
+            'phone':user.phone,
+            'birthday':user.birthday,
+        }
+    result = User.objects.edit_user(form_data, user_data, user)
+    if result['result'] == "error":
+        if 'messages' in result.keys():
+            for message in result['messages']:
+                messages.error(request, message)
+        return redirect(reverse('user_app:show_user'))
+    url_string = 'user/' + str(user_id)
+    return redirect(url_string)
