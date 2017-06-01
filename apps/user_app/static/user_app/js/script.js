@@ -21,10 +21,8 @@ function addMarker(index,title,address) {
                 title: title
             });
             markers.push(marker);
-            var contentString = '<div id="content">' +
-                '<div id="bodyContent">' +
-                '<div class="address">'+ address + '</div>' +
-                '</div>' +
+            var contentString = '<div id="marker">' +
+                '<h4>'+ address + '</h4>' +
                 '</div>';
             var infowindow = new google.maps.InfoWindow({
                 content: contentString
