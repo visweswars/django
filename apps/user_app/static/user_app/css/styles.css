@@ -1,7 +1,13 @@
 body{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding: 5px;
-  background-color: #ccc;
+  background-image: url('../images/wallpaper.jpg');
+  background-repeat: no-repeat;
+  text-align: center;
+}
+.slogan{
+  color: white;
+  font-weight: bold;
 }
 /* Small sized screens */
 @media (max-width: 480px) {
@@ -10,6 +16,13 @@ body{
   }
   .button{
     margin-left: 70px;
+  }
+  .slogan{
+    font-size: 24px; 
+  }
+  #toolbar li{
+    width: 64px;
+    font-size: 14px; 
   }
 }
 /* Medium sized screens */
@@ -20,6 +33,13 @@ body{
   .button{
     margin-left: 170px;
   }
+  .slogan{
+    font-size: 48px; 
+  }
+  #toolbar li{
+    width: 128px;
+    font-size: 24px; 
+  }
 }
 /* Large sized screens */
 @media only screen and (min-width: 1024px) {
@@ -29,18 +49,14 @@ body{
   .button{
     margin-left: 170px;
   }
+  .slogan{
+    font-size: 96px; 
+  }
+  #toolbar li{
+    width: 256px;
+    font-size: 48px; 
+  }
 }
-/*
-ul {
-    list-style-type: none;
-    font-size: 20px;
-}
-li {
-    float: left;
-    padding: 15px;
-    display: list-item;
-}
-*/
 .container{
   background-color: white;
   padding-top: 15px;
@@ -51,6 +67,8 @@ li {
   vertical-align: top;
   padding: 5px;
   margin-bottom: 5px;
+  background-color: white;
+  text-align: left;
 }
 label{
   width: 160px;
@@ -80,4 +98,23 @@ select{
   margin-left: -40px;
   margin-bottom: 5px;
   list-style-type: none;
+}
+div:not(#toolbar) {
+  background-color: white;
+}
+#toolbar ul{
+  margin-left: -40px;
+}
+#toolbar a{
+  color: silver;
+}
+#toolbar li{
+  font-weight: bold;
+  padding: 20px 0;
+  margin: 0;
+  background-color: black;
+  opacity: 0.8;
+  list-style-type: none;
+  display:inline-block;
+  border: 1px solid silver;
 }

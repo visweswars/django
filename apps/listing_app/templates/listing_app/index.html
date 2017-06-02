@@ -35,12 +35,12 @@
           <li class="active"><a href="{% url 'listing_app:search_listing' sell=True %}">Buy</a></li>
           <li><a href="{% url 'listing_app:search_listing' sell=False %}">Rent</a></li>
           <li><a href="{% url 'listing_app:new_listing' %}">Sell</a></li>
-          <li><a href="{% url 'user_app:search_user' %}">Agent finder</a></li>
+          <li><a href="{% url 'user_app:search_user' %}">Agents</a></li>
           {% else %}
           <li class="active"><a href="{% url 'user_app:sign_in' %}">Buy</a></li>
           <li><a href="{% url 'user_app:sign_in' %}">Rent</a></li>
           <li><a href="{% url 'user_app:sign_in' %}">Sell</a></li>
-          <li><a href="{% url 'user_app:sign_in' %}">Agent finder</a></li>
+          <li><a href="{% url 'user_app:sign_in' %}">Agents</a></li>
           {% endif %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -57,15 +57,22 @@
     </div>
     <!--/.container-fluid -->
   </nav>
-
-  <div class="container">
-    <div class="jumbotron">
-      <h1>Find your way home ©</h1>
-    </div>
-    <a href="http://mruanova.com/">Mauricio Ruanova-Hurtado</a> |
-    <a href="https://github.com/kamil-wowczuk">kamil Wowczuk</a>
+  <p class="slogan">Find your way home ©</p>
+  <div id="toolbar">
+  <ul>
+    {% if request.session.current_user != null %}
+    <li class="active"><a href="{% url 'listing_app:search_listing' sell=True %}">Buy</a></li>
+    <li><a href="{% url 'listing_app:search_listing' sell=False %}">Rent</a></li>
+    <li><a href="{% url 'listing_app:new_listing' %}">Sell</a></li>
+    <li><a href="{% url 'user_app:search_user' %}">Agents</a></li>
+    {% else %}
+    <li class="active"><a href="{% url 'user_app:sign_in' %}">Buy</a></li>
+    <li><a href="{% url 'user_app:sign_in' %}">Rent</a></li>
+    <li><a href="{% url 'user_app:sign_in' %}">Sell</a></li>
+    <li><a href="{% url 'user_app:sign_in' %}">Agents</a></li>
+    {% endif %}
+  </ul>
   </div>
-
 </body>
 
 </html>
