@@ -225,3 +225,11 @@ class Listing(models.Model):
     user = models.ForeignKey(User, related_name="listings")
     favorites = models.ManyToManyField(User, related_name="favorites")
     objects = ListingManager()
+
+class Review(models.Model):
+    content = models.TextField(max_length=1000)
+    stars = models.IntegerField()
+    listing = models.ForeignKey(Listing, related_name="reviews")
+    user = models.ForeignKey(User, related_name="reviews")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

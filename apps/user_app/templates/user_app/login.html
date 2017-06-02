@@ -23,6 +23,7 @@
     <a href="{% url 'user_app:join' %}">Join</a>
   </div>
   
+  <div>
   {% if messages %}
     <ul class="messages">
       {% for message in messages %}
@@ -30,6 +31,7 @@
       {% endfor %}
     </ul>
   {% endif %}
+  </div>
 
   <div class="box">
     <form action="/login" method="post">

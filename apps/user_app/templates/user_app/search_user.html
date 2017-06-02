@@ -19,6 +19,7 @@
     <a href="{% url 'user_app:logout' %}">Logout</a>
   </div>
   
+  <div>
   {% if messages %}
     <ul class="messages">
       {% for message in messages %}
@@ -26,16 +27,12 @@
       {% endfor %}
     </ul>
   {% endif %}
+  </div>
   
   <div class="box">
     <h4>Users</h4>
       {% for user in users %}
           <p><a href="{% url 'user_app:show_user' user_id=user.id %}">{{user.phone}}</a> {{user.first_name}} {{user.last_name}} 
-          <!--
-            <a href="mailto:{{user.email}}">{{user.email}}</a>
-            {{user.birthday|date:"Y-m-d"}}
-          -->
-          </p>
       {% endfor %}
   </div>
 </body>

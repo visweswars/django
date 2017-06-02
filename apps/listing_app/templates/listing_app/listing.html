@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>Listing</title>
@@ -10,54 +11,56 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+
 <body>
   <div>
     {% if request.session.current_user != null %}
-    <span>Welcome <a href="{% url 'user_app:show_user' user_id=user.id %}">{{user.first_name}}</a></span> |
-    {% endif %}
+    <span>Welcome <a href="{% url 'user_app:show_user' user_id=user.id %}">{{user.first_name}}</a></span> | {% endif %}
     <a href="{% url 'listing_app:index' %}">Home</a> |
     <a href="{% url 'user_app:logout' %}">Logout</a>
-  </div> 
-  
-  {% if messages %}
+  </div>
+
+  <div>
+    {% if messages %}
     <ul class="messages">
       {% for message in messages %}
-        <li class="{{ message.tags }}">{{ message }}</li>
+      <li class="{{ message.tags }}">{{ message }}</li>
       {% endfor %}
     </ul>
-  {% endif %}
+    {% endif %}
+  </div>
 
   <div class="box">
     <h4>Listing</h4>
     <form action="{% url 'listing_app:edit_listing' listing_id=listing.id %}" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="user" value="user.id">
-        
-        <img src="{% static 'user_app/images/logo.jpg' %}" alt="{{listing.neighborhood}}" class="photo">
+      {% csrf_token %}
+      <input type="hidden" name="user" value="user.id">
 
-        <label for="address1">Address 1:</label>
-        <input type="text" name="address1" value="{{listing.address1}}">
+      <img src="{% static 'user_app/images/logo.jpg' %}" alt="{{listing.neighborhood}}" class="photo">
 
-        <label for="address2">Address 2:</label>
-        <input type="text" name="address2" value="{{listing.address2}}">
+      <label for="address1">Address 1:</label>
+      <input type="text" name="address1" value="{{listing.address1}}">
 
-        <label for="zipcode">Zip Code:</label>
-        <input type="text" name="zipcode" value="{{listing.zipcode}}">
+      <label for="address2">Address 2:</label>
+      <input type="text" name="address2" value="{{listing.address2}}">
 
-        <label for="neighborhood">Neighborhood:</label>
-        <select name="neighborhood-select">
+      <label for="zipcode">Zip Code:</label>
+      <input type="text" name="zipcode" value="{{listing.zipcode}}">
+
+      <label for="neighborhood">Neighborhood:</label>
+      <select name="neighborhood-select">
           <option> </option>
           {% for neighborhood in neighborhoods %}
-          {% if neighborhood.id == listing.neighborhood.id %}
-          <option value="{{neighborhood.id}}" selected>{{neighborhood.name}}</option>
-          {% else %}
-          <option value="{{neighborhood.id}}">{{neighborhood.name}}</option>
-          {% endif %}
+            {% if neighborhood.id == listing.neighborhood.id %}
+              <option value="{{neighborhood.id}}" selected>{{neighborhood.name}}</option>
+            {% else %}
+              <option value="{{neighborhood.id}}">{{neighborhood.name}}</option>
+            {% endif %}
           {% endfor %}
         </select>
 
-        <label for="city">City:</label>
-        <select name="city-select">
+      <label for="city">City:</label>
+      <select name="city-select">
           <option> </option>
           {% for city in citys %}
           {% if city.id == listing.city.id %}
@@ -68,8 +71,8 @@
           {% endfor %}
         </select>
 
-        <label for="state">Select State:</label>
-        <select name="state-select">
+      <label for="state">Select State:</label>
+      <select name="state-select">
           <option> </option>
           {% for state in states %}
           {% if state.id == listing.state.id %}
@@ -79,11 +82,11 @@
           {% endif %}
           {% endfor %}
         </select>
-        <label for="state">or add State:</label>
-        <input type="text" name="new-state" value="">
-        
-        <label for="country">Country:</label>
-        <select name="country-select">
+      <label for="state">or add State:</label>
+      <input type="text" name="new-state" value="">
+
+      <label for="country">Country:</label>
+      <select name="country-select">
           <option> </option>
           {% for country in countrys %}
           {% if country.id == listing.country.id %}
@@ -94,35 +97,39 @@
           {% endfor %}
         </select>
 
-        <label for="description">Description:</label>
-        <textarea name="description">{{listing.description}}</textarea>
+      <label for="description">Description:</label>
+      <textarea name="description">{{listing.description}}</textarea>
 
-        <label for="price">Price:</label>
-        <input type="text" name="price" value="{{listing.price}}">
+      <label for="price">Price:</label>
+      <input type="text" name="price" value="{{listing.price}}">
 
-        <label for="sqft">Square Feet:</label>
-        <input type="text" name="sqft" value="{{listing.sqft}}">
+      <label for="sqft">Square Feet:</label>
+      <input type="text" name="sqft" value="{{listing.sqft}}">
 
-        <label for="beds"># of beds:</label>
-        <input type="text" name="beds" value="{{listing.beds}}">
+      <label for="beds"># of beds:</label>
+      <input type="text" name="beds" value="{{listing.beds}}">
 
-        <label for="baths"># of baths:</label>
-        <input type="text" name="baths" value="{{listing.baths}}">
-        
-        {% if listing.sell %}
-        <input type="checkbox" name="sell"  value="sell" checked> sell
-        {% else %}
-        <input type="checkbox" name="sell"  value="sell"> sell
-        {% endif %}
+      <label for="baths"># of baths:</label>
+      <input type="text" name="baths" value="{{listing.baths}}"> {% if listing.sell %}
+      <input type="checkbox" name="sell" value="sell" checked> sell {% else %}
+      <input type="checkbox" name="sell" value="sell"> sell {% endif %} {% if listing.rent %}
+      <input type="checkbox" name="rent" value="rent" checked> rent {% else %}
+      <input type="checkbox" name="rent" value="rent"> rent {% endif %}
 
-        {% if listing.rent %}
-        <input type="checkbox" name="rent"  value="rent" checked> rent
-        {% else %}
-        <input type="checkbox" name="rent"  value="rent"> rent
-        {% endif %}
-
-        <input class="button" type="submit" value="Save Changes">
+      <input class="button" type="submit" value="Save Changes">
+    </form>
+    
+    <form action="{% url 'listing_app:add_to_my_favorites' listing_id=listing.id %}" method="post">
+      {% csrf_token %}
+      <input type="submit" class="button" value="Add to Favorites"></p>
     </form>
   </div>
+  <div class="box">
+    <h4>Favorited by</h4>
+    {% for favorite in listing.favorites.all %}
+    <p><a href="{% url 'user_app:show_user' user_id=user.id %}">{{favorite.phone}}</a> {{favorite.first_name}} {{favorite.last_name}} 
+    {% endfor %}
+  </div>
 </body>
+
 </html>

@@ -21,6 +21,7 @@
     <a href="{% url 'user_app:logout' %}">Logout</a>
   </div>
   
+  <div>
   {% if messages %}
     <ul class="messages">
       {% for message in messages %}
@@ -28,7 +29,8 @@
       {% endfor %}
     </ul>
   {% endif %}
-
+  </div>
+  
   <div class="box">
     <h4>Listings</h4>
       <ul>

@@ -220,3 +220,15 @@ def edit_listing(request, listing_id):
             for message in result['messages']:
                 messages.success(request, message)
     return redirect(reverse('listing_app:show_listing', kwargs={'listing_id':listing_id}))
+
+def add_to_my_favorites(request, listing_id):
+    user = User.objects.get(pk=request.session['current_user'])
+    listing = Listing.objects.get(pk=listing_id)
+    user.favorites.add(listing)
+    return redirect(reverse('listing_app:show_listing', kwargs={'listing_id':listing_id}))
+
+def remove_from_my_favorites(request, listing_id):
+    user = User.objects.get(pk=request.session['current_user'])
+    listing = Listing.objects.get(pk=listing_id)
+    user.favorites.remove(listing)
+    return redirect(reverse('user_app:show_user', kwargs={'user_id':user.id}))

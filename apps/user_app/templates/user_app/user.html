@@ -18,6 +18,7 @@
     <a href="{% url 'user_app:logout' %}">Logout</a>
   </div>
   
+  <div>
   {% if messages %}
     <ul class="messages">
       {% for message in messages %}
@@ -25,6 +26,7 @@
       {% endfor %}
     </ul>
   {% endif %}
+  </div>
 
   <div class="box">
     <form action="/edit" method="post">
@@ -46,6 +48,29 @@
       <input class="button" type="submit" value="Save Changes">
       
     </form>
+  </div>
+  <div class="box">
+    <h4>My Favorites</h4>
+    {% for favorite in user.favorites.all %}
+    <form action="{% url 'listing_app:remove_from_my_favorites' listing_id=favorite.id %}" method="post">
+      {% csrf_token %}
+      <p>{{favorite.address1}} {{favorite.address2}} {{favorite.zipcode}}</p>
+      <input type="submit" class="button" value="Remove from My List"></p>
+    </form>
+    {% endfor %}
+  </div>
+  <div class="box">
+    <h4>My Listings</h4>
+    <ul>
+      {% for listing in user.listings.all %}
+      <li>
+        <img src="{% static 'user_app/images/logo.png' %}" alt="{{listing.neighborhood}}">
+        <a href="{% url 'listing_app:show_listing' listing_id=listing.id %}">
+            {{listing.address1}} {{listing.address2}}, {{listing.zipcode}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 </body>
 
 </html>
