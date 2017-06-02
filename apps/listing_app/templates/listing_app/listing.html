@@ -32,6 +32,8 @@
     <form action="{% url 'listing_app:edit_listing' listing_id=listing.id %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="user" value="user.id">
+        
+        <img src="{% static 'user_app/images/logo.jpg' %}" alt="{{listing.neighborhood}}" class="photo">
 
         <label for="address1">Address 1:</label>
         <input type="text" name="address1" value="{{listing.address1}}">

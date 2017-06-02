@@ -9,6 +9,11 @@ body{
   color: white;
   font-weight: bold;
 }
+.button{
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(180deg,orange, darkorange, orange);
+}
 /* Small sized screens */
 @media (max-width: 480px) {
   .box{
@@ -101,6 +106,7 @@ select{
 }
 div:not(#toolbar) {
   background-color: white;
+  margin-bottom: 5px;
 }
 #toolbar ul{
   margin-left: -40px;
@@ -117,4 +123,7 @@ div:not(#toolbar) {
   list-style-type: none;
   display:inline-block;
   border: 1px solid silver;
+}
+.photo{
+  margin-bottom: 5px;
 }
