@@ -17,17 +17,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<body>
-  <div>
-  {% if messages %}
-    <ul class="messages">
-      {% for message in messages %}
-        <li class="{{ message.tags }}">{{ message }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-  </div>
-  
+<body>  
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -67,7 +57,19 @@
     </div>
     <!--/.container-fluid -->
   </nav>
+
+  <div id="flash">
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  </div>
+
   <p class="slogan">Find your way home ©</p>
+  
   <div id="toolbar">
   <ul>
     {% if request.session.current_user != null %}

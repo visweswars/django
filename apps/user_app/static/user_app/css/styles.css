@@ -104,7 +104,7 @@ select{
   margin-bottom: 5px;
   list-style-type: none;
 }
-div:not(#toolbar) {
+#flash {
   background-color: white;
   margin-bottom: 5px;
 }

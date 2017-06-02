@@ -13,12 +13,47 @@
 </head>
 
 <body>
-  <div>
-    <a href="{% url 'listing_app:index' %}">Home</a> |
-    <a href="{% url 'user_app:logout' %}">Logout</a>
-  </div>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+        <a class="navbar-brand" href="#"><img src="{% static 'favicon.ico' %}" alt="zillow"></a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse in" aria-expanded="true">
+        <ul class="nav navbar-nav">
+          {% if request.session.current_user != null %}
+          <li class="active"><a href="{% url 'listing_app:search_listing' sell=True %}">Buy</a></li>
+          <li><a href="{% url 'listing_app:search_listing' sell=False %}">Rent</a></li>
+          <li><a href="{% url 'listing_app:new_listing' %}">Sell</a></li>
+          <li><a href="{% url 'user_app:search_user' %}">Agents</a></li>
+          {% else %}
+          <li class="active"><a href="{% url 'user_app:sign_in' %}">Buy</a></li>
+          <li><a href="{% url 'user_app:sign_in' %}">Rent</a></li>
+          <li><a href="{% url 'user_app:sign_in' %}">Sell</a></li>
+          <li><a href="{% url 'user_app:sign_in' %}">Agents</a></li>
+          {% endif %}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {% if request.session.current_user != null %}
+          <li><a href="{% url 'user_app:show_user' user_id=user.id %}">{{user.first_name}}</a></li>
+          <li><a href="{% url 'user_app:logout' %}">Logout</a></li>
+          {% else %}
+          <li><a href="{% url 'user_app:sign_in' %}">Sign in</a></li>
+          <li><a href="{% url 'user_app:join' %}">Join</a></li>
+          {% endif %}
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+    <!--/.container-fluid -->
+  </nav>
   
-  <div>
+  <div id="flash">
   {% if messages %}
     <ul class="messages">
       {% for message in messages %}

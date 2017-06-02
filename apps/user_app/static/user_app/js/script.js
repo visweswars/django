@@ -10,16 +10,17 @@ function initialize() {
     };
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
 };
-function addMarker(index,title,address) {
+function addMarker(index,address) {
     geocoder.geocode({ 'address': address }, function (results, status) {
         if (status == 'OK') {
+            map.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location,
-                title: title
+                title: address
             });
             markers.push(marker);
-            var contentString = '<div id="marker">' +
+            var contentString = '<div class="marker">' +
                 '<h4>'+ address + '</h4>' +
                 '</div>';
             var infowindow = new google.maps.InfoWindow({
@@ -35,7 +36,8 @@ function addMarker(index,title,address) {
     });
 };
 $(document).ready(function () {
-    $("li").each(function( index ) {
-        addMarker(index,"Zillow",$( this ).text());
+    $("#listings li").each(function( index ) {
+        var address = $(this).text().replace(/\s+$/,"").replace(/^\s+/,"");
+        addMarker(index,address);
     });
 });
