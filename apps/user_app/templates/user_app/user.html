@@ -54,6 +54,7 @@
     {% for favorite in user.favorites.all %}
     <form action="{% url 'listing_app:remove_from_my_favorites' listing_id=favorite.id %}" method="post">
       {% csrf_token %}
+        <img src="{% static 'user_app/images/logo.png' %}" alt="{{listing.neighborhood}}">
         <a href="{% url 'listing_app:show_listing' listing_id=favorite.id %}">
           {{favorite.address1}} {{favorite.address2}}, {{favorite.zipcode}}
         </a>
