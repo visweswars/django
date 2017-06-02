@@ -127,3 +127,6 @@ select{
 .photo{
   margin-bottom: 5px;
 }
+.marker{
+  font-weight: bold;
+}

@@ -5,7 +5,7 @@ function initialize() {
     geocoder = new google.maps.Geocoder();
     var latlng = new google.maps.LatLng(41.8971828, -87.63523709999998);
     var mapOptions = {
-        zoom: 14,
+        zoom: 12,
         center: latlng
     };
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
@@ -21,7 +21,7 @@ function addMarker(index,address) {
             });
             markers.push(marker);
             var contentString = '<div class="marker">' +
-                '<h4>'+ address + '</h4>' +
+                '<p>'+ address + '</p>' +
                 '</div>';
             var infowindow = new google.maps.InfoWindow({
                 content: contentString
