@@ -9,6 +9,5 @@ urlpatterns = [
     url(r'^create_user', views.create_user, name='create_user'),
     url(r'^user/(?P<user_id>\d+)$', views.show_user, name='show_user'),
     url(r'^search_user$', views.search_user, name='search_user'),
-    url(r'^edit$', views.edit_user, name='edit_user'),
-
+    url(r'^edit/(?P<user_id>\d+)$', views.edit_user, name='edit_user')
 ]

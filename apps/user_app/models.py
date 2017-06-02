@@ -118,83 +118,59 @@ class UserManager(models.Manager):
         return {'result':"Successfully registered new user", 'messages':messages, 'user':user}
 
     #edit_user validates and processed user info change data from user.html template
-    def edit_user(self, form_data, user_data, user):
+    def edit_user(self, data, session, user):
         error = False
+        session['first_name'] = data['first_name']
+        session['last_name'] = data['last_name']
+        session['email'] = data['email']
+        session['phone'] = data['phone']
+        #session['password'] = data['password']
+        session['birthday'] = data['birthday']
         messages = []
 
-        if len(form_data['first_name']) < 2:
+        if len(data['first_name']) < 2:
             messages.append("First name must be at least 2 characters")
             error = True
-        elif not NAME_REGEX.match(form_data['first_name']):
+        elif not NAME_REGEX.match(data['first_name']):
             messages.append("First name can only contain letters or spaces")
             error = True
-        if len(form_data['last_name']) < 2:
+        if len(data['last_name']) < 2:
             messages.append("Last name must be at least 2 characters")
             error = True
-        elif not NAME_REGEX.match(form_data['last_name']):
+        elif not NAME_REGEX.match(data['last_name']):
             messages.append("Last name can only contain letters or spaces")
             error = True
-        if len(form_data['email']) < 1:
+        if len(data['email']) < 1:
             messages.append("Email is required")
             error = True
-        elif not EMAIL_REGEX.match(form_data['email']):
+        elif not EMAIL_REGEX.match(data['email']):
             messages.append("Please enter a valid email")
             error = True
 
         now = datetime.now()
-        if len(form_data['birthday']) < 1:
+        if len(data['birthday']) < 1:
             messages.append("Birthday is required")
             error = True
         else:
-            birthday = datetime.strptime(form_data['birthday'], '%Y-%m-%d') # '%m/%d/%Y' # '%Y-%-%d'
+            birthday = datetime.strptime(data['birthday'], '%Y-%m-%d') # '%m/%d/%Y' # '%Y-%-%d'
             if birthday >= now:
                 messages.append("Birthday is should be a date in the past")
                 error = True
         if error:
             return {'result':"error", 'messages':messages}
         
-        #This will check if there were any changes made to the information
-        #First name
-        if form_data['first_name'] != user_data['first_name']:
-            first_name = form_data['first_name']
-        elif form_data['first_name'] == user_data['first_name']:
-            first_name = user_data['first_name']
-        else:
-            print 'Error!'
-        #Last name
-        if form_data['last_name'] != user_data['last_name']:
-            last_name = form_data['last_name']
-        elif form_data['last_name'] == user_data['last_name']:
-            last_name = user_data['last_name']
-        else:
-            print 'Error!'
-        #Email
-        if form_data['email'] != user_data['email']:
-            email = form_data['email']
-        elif form_data['email'] == user_data['email']:
-            email = user_data['email']
-        else:
-            print 'Error!'
-        #Phone
-        if form_data['phone'] != user_data['phone']:
-            phone = form_data['phone']
-        elif form_data['phone'] == user_data['phone']:
-            phone = user_data['phone']
-        else:
-            print 'Error!'
-        #Birthday
-        if form_data['birthday'] != user_data['birthday']:
-            birthday = form_data['birthday']
-        elif form_data['birthday'] == user_data['birthday']:
-            birthday = user_data['birthday']
-        else:
-            print 'Error!'
-        user.first_name = first_name
-        user.last_name = last_name
-        user.email = email
-        user.phone = phone
-        user.birthday = birthday
+        user.first_name = data['first_name']
+        user.last_name = data['last_name']
+        user.email = data['email']
+        user.phone = data['phone']
+        user.birthday = data['birthday']
         user.save() 
+        session.pop('first_name')
+        session.pop('last_name')
+        session.pop('email')
+        session.pop('phone')
+        #session.pop('password')
+        session.pop('birthday')
 
         return {'result':"Successfully registered new user"}
 
