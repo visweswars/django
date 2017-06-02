@@ -52,8 +52,6 @@ class UserManager(models.Manager):
         session['last_name'] = data['last_name']
         session['email'] = data['email']
         session['phone'] = data['phone']
-        session['password'] = data['password']
-        session['confirm_password'] = data['confirm_password']
         session['birthday'] = data['birthday']
         messages = []
         if len(data['first_name']) < 2:
@@ -112,8 +110,6 @@ class UserManager(models.Manager):
         session.pop('last_name')
         session.pop('email')
         session.pop('phone')
-        session.pop('password')
-        session.pop('confirm_password')
         session.pop('birthday')
         return {'result':"Successfully registered new user", 'messages':messages, 'user':user}
 
@@ -124,7 +120,6 @@ class UserManager(models.Manager):
         session['last_name'] = data['last_name']
         session['email'] = data['email']
         session['phone'] = data['phone']
-        #session['password'] = data['password']
         session['birthday'] = data['birthday']
         messages = []
 
@@ -147,6 +142,14 @@ class UserManager(models.Manager):
             messages.append("Please enter a valid email")
             error = True
 
+        if len(data['password']) > 0:
+            if not PASSWORD_REGEX.match(data['password']):
+                messages.append("Password must be at least 8 characters with at least 1 uppercase letter and 1 numeric value")
+                error = True
+            elif data['confirm_password'] != data['password']:
+                messages.append("Password confirmation failed")
+                error = True
+
         now = datetime.now()
         if len(data['birthday']) < 1:
             messages.append("Birthday is required")
@@ -159,17 +162,21 @@ class UserManager(models.Manager):
         if error:
             return {'result':"error", 'messages':messages}
         
+        salt = bcrypt.gensalt()
+        hashed_password = bcrypt.hashpw(str(data['password']), str(salt))
         user.first_name = data['first_name']
         user.last_name = data['last_name']
         user.email = data['email']
         user.phone = data['phone']
         user.birthday = data['birthday']
+        if data['password']:
+            user.salt = salt
+            user.password = hashed_password
         user.save() 
         session.pop('first_name')
         session.pop('last_name')
         session.pop('email')
         session.pop('phone')
-        #session.pop('password')
         session.pop('birthday')
 
         return {'result':"Successfully registered new user"}

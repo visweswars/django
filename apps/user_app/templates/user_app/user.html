@@ -79,8 +79,13 @@
 
       <label for="birthday">Birthday:</label>
       <input type="date" name="birthday" value="{{agent.birthday|date:"Y-m-d"}}">
-
+      <p></p>
       {% if request.session.current_user == agent.id %}
+      <p>Change Password?</p>
+      <label for="password">Password:</label>
+      <input type="password" name="password" value="">
+      <label for="confirm_password">Confirm PW:</label>
+      <input type="password" name="confirm_password" value="">
       <input class="button" type="submit" value="Save Changes">
       {% endif %}
     </form>

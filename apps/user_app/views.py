@@ -93,7 +93,9 @@ def edit_user(request, user_id):
             'last_name':request.POST['last_name'],
             'email':request.POST['email'],
             'phone':request.POST['phone'], 
-            'birthday':request.POST['birthday']
+            'birthday':request.POST['birthday'],
+            'password':request.POST['password'],
+            'confirm_password':request.POST['confirm_password']
         }
         result = User.objects.edit_user(data, request.session, user)
         if result['result'] == "error":
