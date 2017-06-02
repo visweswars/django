@@ -32,7 +32,7 @@
   <div class="box">
     <h4>Users</h4>
       {% for user in users %}
-          <p><a href="{% url 'user_app:show_user' user_id=user.id %}">{{user.phone}}</a> {{user.first_name}} {{user.last_name}} 
+          <p><a href="{% url 'user_app:show_user' user_id=user.id %}">{{user.first_name}} {{user.last_name}}</a> {{user.phone}}
       {% endfor %}
   </div>
 </body>

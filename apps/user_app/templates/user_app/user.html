@@ -54,7 +54,9 @@
     {% for favorite in user.favorites.all %}
     <form action="{% url 'listing_app:remove_from_my_favorites' listing_id=favorite.id %}" method="post">
       {% csrf_token %}
-      <p>{{favorite.address1}} {{favorite.address2}} {{favorite.zipcode}}</p>
+        <a href="{% url 'listing_app:show_listing' listing_id=favorite.id %}">
+          {{favorite.address1}} {{favorite.address2}}, {{favorite.zipcode}}
+        </a>
       <input type="submit" class="button" value="Remove from My List"></p>
     </form>
     {% endfor %}
@@ -66,7 +68,8 @@
       <li>
         <img src="{% static 'user_app/images/logo.png' %}" alt="{{listing.neighborhood}}">
         <a href="{% url 'listing_app:show_listing' listing_id=listing.id %}">
-            {{listing.address1}} {{listing.address2}}, {{listing.zipcode}}</a>
+          {{listing.address1}} {{listing.address2}}, {{listing.zipcode}}
+        </a>
       </li>
       {% endfor %}
     </ul>

@@ -9,5 +9,7 @@ urlpatterns = [
     url(r'^listing/(?P<listing_id>\d+)$', views.show_listing, name='show_listing'),
     url(r'^edit_listing/(?P<listing_id>\d+)$', views.edit_listing, name='edit_listing'),
     url(r'^add_to_my_favorites/(?P<listing_id>\d+)$', views.add_to_my_favorites, name='add_to_my_favorites'),
-    url(r'^remove_from_my_favorites/(?P<listing_id>\d+)$', views.remove_from_my_favorites, name='remove_from_my_favorites')
+    url(r'^remove_from_my_favorites/(?P<listing_id>\d+)$', views.remove_from_my_favorites, name='remove_from_my_favorites'),
+    url(r'^add_review/(?P<listing_id>\d+)$', views.add_review, name='add_review'),
+    url(r'^delete_review/(?P<review_id>\d+)$', views.delete_review, name='delete_review'),
 ]

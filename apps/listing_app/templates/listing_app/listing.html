@@ -127,8 +127,41 @@
   <div class="box">
     <h4>Favorited by</h4>
     {% for favorite in listing.favorites.all %}
-    <p><a href="{% url 'user_app:show_user' user_id=user.id %}">{{favorite.phone}}</a> {{favorite.first_name}} {{favorite.last_name}} 
+    <p><a href="{% url 'user_app:show_user' user_id=user.id %}">{{favorite.first_name}} {{favorite.last_name}}</a> {{user.phone}}
     {% endfor %}
+  </div>
+  <div class="box">
+    <h4>Reviews:</h4>
+    {% for review in reviews %}
+      <p>Rating: {% for i in "x"|rjust:review.stars %}
+      <img src="{% static 'user_app/images/star.png' %}" alt="star"> {% endfor %}</p>
+      <p><a href="{% url 'user_app:show_user' user_id=review.user.id %}">{{review.user.first_name}} {{review.user.last_name}}</a> says: <i>{{review.content}}</i></p>
+      <p>Posted on {{review.created_at}} 
+      {% if review.user.id == request.session.current_user %}</p>
+      <form action="{% url 'listing_app:delete_review' review_id=review.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" class="button" value="Delete this Review"></p>
+      </form>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="box">
+    <h4>Add a review</h4>
+    <form action="{% url 'listing_app:add_review' listing_id=listing.id %}" method="post">
+      {% csrf_token %}
+      <label for="content">Review:</label>
+      <textarea name="content" placeholder="Your review here..."></textarea>
+      <br>
+      <label for="rating">Rating (stars):</label>
+      <select name="rating">
+        <option value="5">5</option>
+        <option value="4">4</option>
+        <option value="3">3</option>
+        <option value="2">2</option>
+        <option value="1">1</option>
+      </select>
+      <input class="button" type="submit" name="" value="Submit Review">
+    </form>
   </div>
 </body>
 

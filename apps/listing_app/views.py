@@ -133,7 +133,8 @@ def show_listing(request, listing_id):
         'citys':City.objects.all(),
         'states':State.objects.all(),
         'countrys':Country.objects.all(),
-        'listing':Listing.objects.get(id=listing_id)
+        'listing':Listing.objects.get(id=listing_id),
+        'reviews':Review.objects.all()
     }
     if "current_user" in request.session.keys():
         user = User.objects.get(pk=request.session['current_user'])
@@ -232,3 +233,18 @@ def remove_from_my_favorites(request, listing_id):
     listing = Listing.objects.get(pk=listing_id)
     user.favorites.remove(listing)
     return redirect(reverse('user_app:show_user', kwargs={'user_id':user.id}))
+
+def add_review(request, listing_id):
+    if request.method == "POST":
+        content = request.POST['content']
+        stars = request.POST['rating']
+        user = User.objects.get(pk=request.session['current_user'])
+        listing = Listing.objects.get(pk=listing_id)
+        Review.objects.create(content=content, stars=stars, user=user, listing=listing)
+    return redirect(reverse('listing_app:show_listing', kwargs={'listing_id':listing_id}))
+
+def delete_review(request, review_id):
+    review = Review.objects.get(pk=review_id)
+    listing_id = review.listing.id
+    review.delete()
+    return redirect(reverse('listing_app:show_listing', kwargs={'listing_id':listing_id}))
