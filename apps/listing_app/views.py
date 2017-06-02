@@ -22,10 +22,10 @@ def index(request):
 def new_listing(request):
     context = {
         'messages':get_messages(request),
-        'neighborhoods':Neighborhood.objects.all(),
-        'citys':City.objects.all(),
-        'states':State.objects.all(),
-        'countrys':Country.objects.all()
+        'neighborhoods':Neighborhood.objects.all().order_by('name'),
+        'citys':City.objects.all().order_by('name'),
+        'states':State.objects.all().order_by('name'),
+        'countrys':Country.objects.all().order_by('name')
     }
     if "current_user" in request.session.keys():
         user = User.objects.get(pk=request.session['current_user'])
@@ -129,12 +129,12 @@ def search_listing(request, sell):
 def show_listing(request, listing_id):
     context = {
         'messages':get_messages(request),
-        'neighborhoods':Neighborhood.objects.all(),
-        'citys':City.objects.all(),
-        'states':State.objects.all(),
-        'countrys':Country.objects.all(),
+        'neighborhoods':Neighborhood.objects.all().order_by('name'),
+        'citys':City.objects.all().order_by('name'),
+        'states':State.objects.all().order_by('name'),
+        'countrys':Country.objects.all().order_by('name'),
         'listing':Listing.objects.get(id=listing_id),
-        'reviews':Review.objects.all()
+        'reviews':Review.objects.filter(listing_id=listing_id)
     }
     if "current_user" in request.session.keys():
         user = User.objects.get(pk=request.session['current_user'])

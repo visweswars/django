@@ -80,7 +80,11 @@
         <select name="neighborhood-select">
           <option> </option>
           {% for neighborhood in neighborhoods %}
-          <option value="{{neighborhood.id}}">{{neighborhood.name}}</option>
+            {% if neighborhood.id == request.session.neighborhood %}
+              <option value="{{neighborhood.id}}" selected>{{neighborhood.name}}</option>
+            {% else %}
+              <option value="{{neighborhood.id}}">{{neighborhood.name}}</option>
+            {% endif %}
           {% endfor %}
         </select>
         <label for="neighborhood">or add Neighborhood:</label>
@@ -90,7 +94,11 @@
         <select name="city-select">
           <option> </option>
           {% for city in citys %}
+          {% if city.id == request.session.city.id %}
+          <option value="{{city.id}}" selected>{{city.name}}</option>
+          {% else %}
           <option value="{{city.id}}">{{city.name}}</option>
+          {% endif %}
           {% endfor %}
         </select>
         <label for="city">or add City:</label>
@@ -100,7 +108,11 @@
         <select name="state-select">
           <option> </option>
           {% for state in states %}
+          {% if state.id == request.session.state.id %}
+          <option value="{{state.id}}" selected>{{state.name}}</option>
+          {% else %}
           <option value="{{state.id}}">{{state.name}}</option>
+          {% endif %}
           {% endfor %}
         </select>
         <label for="state">or add State:</label>
@@ -110,7 +122,11 @@
         <select name="country-select">
           <option> </option>
           {% for country in countrys %}
+          {% if country.id == request.session.country.id %}
+          <option value="{{country.id}}" selected>{{country.name}}</option>
+          {% else %}
           <option value="{{country.id}}">{{country.name}}</option>
+          {% endif %}
           {% endfor %}
         </select>
         <label for="country">or add Country:</label>

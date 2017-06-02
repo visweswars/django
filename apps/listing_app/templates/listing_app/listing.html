@@ -78,6 +78,12 @@
           </li>
       </ul>
 
+      <label for="user">Agent:</label>
+      <p>
+        <img src="{% static 'user_app/images/user.ico' %}" alt="{{listing.user.first_name}} {{listing.user.last_name}}">
+        <a href="{% url 'user_app:show_user' user_id=listing.user.id %}">{{listing.user.first_name}} {{listing.user.last_name}}</a>
+        <img src="{% static 'user_app/images/phone.png' %}" alt="{{listing.user.first_name}} {{listing.user.last_name}}"> {{listing.user.phone}}
+      </p>
       <img src="{% static 'user_app/images/logo.jpg' %}" alt="{{listing.neighborhood}}" class="photo">
 
       <label for="address1">Address 1:</label>
@@ -171,7 +177,8 @@
     {% for favorite in listing.favorites.all %}
         <p>
           <img src="{% static 'user_app/images/user.jpg' %}" alt="{{favorite.first_name}} {{favorite.last_name}}">
-          <a href="{% url 'user_app:show_user' user_id=favorite.id %}">{{favorite.first_name}} {{favorite.last_name}}</a> {{favorite.phone}}
+          <a href="{% url 'user_app:show_user' user_id=favorite.id %}">{{favorite.first_name}} {{favorite.last_name}}</a>
+          <img src="{% static 'user_app/images/phone.png' %}" alt="{{favorite.first_name}} {{favorite.last_name}}"> {{favorite.phone}}
         </p>
     {% endfor %}
   </div>
@@ -212,6 +219,7 @@
     </form>
   </div>
   <div class="box">
+    <h4>Map</h4>
     <div id="map"></div>
   </div>
 </body>

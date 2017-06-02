@@ -152,10 +152,10 @@ class ListingManager(models.Manager):
             messages.append("Please enter a valid zipcode")
             error = True
         if len(data['description']) < 3:
-            messages.append("description must be at least 5 characters")
+            messages.append("description must be at least 3 characters")
             error = True
-        if len(data['price']) < 4:
-            messages.append("price must be at least 4 characters")
+        if len(data['price']) < 3:
+            messages.append("price must be at least 3 characters")
             error = True
         if len(data['sqft']) < 3:
             messages.append("sqft must be at least 3 characters")
