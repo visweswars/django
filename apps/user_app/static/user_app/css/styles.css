@@ -102,7 +102,6 @@ select{
     width: 100%;
 }
 .box li{
-  margin-left: -40px;
   margin-bottom: 5px;
   list-style-type: none;
 }
