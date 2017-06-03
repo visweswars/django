@@ -167,12 +167,6 @@
       <input class="button" type="submit" value="Save Changes">
     </form>
     
-    <form action="{% url 'listing_app:add_to_my_favorites' listing_id=listing.id %}" method="post">
-      {% csrf_token %}
-      <input type="submit" class="button" value="Add to Favorites"></p>
-    </form>
-  </div>
-  <div class="box">
     <h4>Favorited by</h4>
     {% for favorite in listing.favorites.all %}
         <p>
@@ -181,6 +175,11 @@
           <img src="{% static 'user_app/images/phone.png' %}" alt="{{favorite.first_name}} {{favorite.last_name}}"> {{favorite.phone}}
         </p>
     {% endfor %}
+
+    <form action="{% url 'listing_app:add_to_my_favorites' listing_id=listing.id %}" method="post">
+      {% csrf_token %}
+      <input type="submit" class="button" value="Add to Favorites"></p>
+    </form>
   </div>
   <div class="box">
     <h4>Reviews:</h4>
@@ -199,8 +198,7 @@
       </form>
       {% endif %}
     {% endfor %}
-  </div>
-  <div class="box">
+
     <h4>Add a review</h4>
     <form action="{% url 'listing_app:add_review' listing_id=listing.id %}" method="post">
       {% csrf_token %}

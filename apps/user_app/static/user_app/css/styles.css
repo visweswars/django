@@ -1,18 +1,6 @@
-body{
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  padding: 5px;
-  background-image: url('../images/wallpaper.jpg');
-  background-repeat: no-repeat;
-  text-align: center;
-}
-.slogan{
-  color: white;
-  font-weight: bold;
-}
-.button{
-  color: white;
-  font-weight: bold;
-  background: linear-gradient(180deg,orange, darkorange, orange);
+*{
+  margin: 0;
+  padding: 0;
 }
 /* Small sized screens */
 @media (max-width: 480px) {
@@ -61,6 +49,20 @@ body{
     width: 256px;
     font-size: 48px; 
   }
+}
+body{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-image: url('../images/wallpaper.jpg');
+  text-align: center;
+}
+.slogan{
+  color: white;
+  font-weight: bold;
+}
+.button{
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(180deg,orange, darkorange, orange);
 }
 .container{
   background-color: white;
