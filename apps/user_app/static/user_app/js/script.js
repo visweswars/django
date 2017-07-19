@@ -37,6 +37,7 @@ function addMarker(index,address) {
 };
 $(document).ready(function () {
     $("#listings li").each(function( index ) {
+        initialize();
         var address = $(this).text().replace(/\s+$/,"").replace(/^\s+/,"");
         addMarker(index,address);
     });
