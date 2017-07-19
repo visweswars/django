@@ -180,8 +180,7 @@
       {% csrf_token %}
       <input type="submit" class="button" value="Add to Favorites"></p>
     </form>
-  </div>
-  <div class="box">
+
     <h4>Reviews:</h4>
     {% for review in reviews %}
       <p>Rating: {% for i in "x"|rjust:review.stars %}
