@@ -12,3 +12,9 @@ python manage.py runserver
 git add .
 git commit -m "updated read me with git commands"
 git push -u origin master
+
+#update
+sudo pip install --upgrade pip
+pip install Django
+pip freeze > requirements.txt
+
