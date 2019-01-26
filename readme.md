@@ -10,7 +10,7 @@ python manage.py runserver
 127.0.0.1:8000
 
 git add .
-git commit -m "updated read me with git commands"
+git commit -m "updated requirements.txt"
 git push -u origin master
 
 #update
