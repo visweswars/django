@@ -1,7 +1,10 @@
 Zillow project at Coding Dojo using Python Django by Mauricio Ruanova-Hurtado and Kamil Wowczuk
 
 cd "git/dojo/4-Python/environments/djangoEnv/Scripts"
+or 
+cd "git/dojo/4-Python/environments/python3env/bin"
 source activate
+
 cd ../../../
 cd django
 cat runtime.txt
