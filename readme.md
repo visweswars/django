@@ -19,6 +19,6 @@ git push -u origin master
 
 #update
 sudo pip install --upgrade pip
-pip install -U Django
+sudo pip install -U Django
 pip freeze > requirements.txt
 
