@@ -1,4 +1,4 @@
-Zillow project at Coding Dojo using Python Django by Mauricio Ruanova-Hurtado and Kamil Wowczuk
+Zillow project using Python Django by mruanova
 
 cd "git/dojo/4-Python/environments/djangoEnv/Scripts"
 or 
